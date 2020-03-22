@@ -11,11 +11,13 @@ from PyQt5.QtWidgets import QAction
 
 class ExitAction(QAction):
     def __init__(self, parent=None):
+        self.exe_name = 'BatLauncher.exe'
         icon = QIcon('resources/icons/exit.png')
         super().__init__(icon, '&退出系统(exit)', parent)
         self.triggered.connect(self.sys_exit)
 
     def sys_exit(self):
-        print(self)
         os.system('taskkill /f /t /im python.exe')
+        exit_command = 'taskkill /f /t /im {}'.format(self.exe_name)
+        os.system(exit_command)
         pass
