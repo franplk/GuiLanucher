@@ -43,7 +43,7 @@ if __name__ == '__main__':
     process_pool = multiprocessing.Pool(process_length)
     process_pool.apply_async(run_qt)
     for config in config_list:
-        process_pool.apply_async(run_bat, args=(config['path'],))
+        process_pool.apply_async(run_bat, args=(config['start_bat'],))
     process_pool.close()
 
     # 使得主进程挂起而不退出

@@ -4,19 +4,18 @@
 # @Author Franplk
 
 import os
-import webbrowser
 
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QAction
 
 
-def sys_exit():
-    os.system('taskkill /f /t /im manager.exe')
-    os.system('taskkill /f /t /im python.exe')
-    pass
-
-
 class ExitAction(QAction):
     def __init__(self, parent=None):
-        super().__init__(QIcon('resources/icons/exit.png'), '&退出系统(exit)', parent)
-        self.triggered.connect(sys_exit)
+        icon = QIcon('resources/icons/exit.png')
+        super().__init__(icon, '&退出系统(exit)', parent)
+        self.triggered.connect(self.sys_exit)
+
+    def sys_exit(self):
+        print(self)
+        os.system('taskkill /f /t /im python.exe')
+        pass

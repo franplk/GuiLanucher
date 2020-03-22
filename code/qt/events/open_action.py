@@ -9,11 +9,11 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QAction
 
 
-class PageAction(QAction):
+class OpenAction(QAction):
     def __init__(self, config: dict, parent=None):
-        name = config.get('name', '未定义')
+        menu_name = '打开{}'.format(config.get('name', ''))
         icon = config.get('icon', 'icons/open.png')
-        super().__init__(QIcon(icon), name, parent)
+        super().__init__(QIcon(icon), menu_name, parent)
         self.page = config.get('page', None)
         self.triggered.connect(self.open_eva_system)
 
