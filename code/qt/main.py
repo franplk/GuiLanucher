@@ -28,9 +28,10 @@ class SystemTray(QWidget):
         tray_menu = QMenu()
         # 添加菜单
         for config in config_list:
-            sys_name = config.get('name')
-            tray_menu.addAction(OpenAction(config, self))
-            stop_bat = config.get('stop_bat', None)
+            params = config.get('params')
+            sys_name = params.get('name')
+            tray_menu.addAction(OpenAction(params, self))
+            stop_bat = params.get('stop_bat', None)
             if stop_bat:
                 tray_menu.addAction(StopAction(sys_name, stop_bat, self))
         tray_menu.addAction(ExitAction(self))

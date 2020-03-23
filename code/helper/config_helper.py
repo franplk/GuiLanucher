@@ -14,12 +14,14 @@ class ConfigHelper(object):
         config_parse = configparser.ConfigParser()
         config_parse.read(file_paths, encoding="utf-8-sig")
         config_list = [
-            dict(config_parse.items(section))
-            for section in config_parse.sections()
+            {
+                'name': section,
+                'params': dict(config_parse.items(section))
+            } for section in config_parse.sections()
         ]
         return config_list
 
 
 if __name__ == '__main__':
-    map_config = ConfigHelper.read_config(r'E:\develop\Project_Research\GuiLauncher\code\bat.config')
+    map_config = ConfigHelper.read_config(r'E:\xxx\bat.config')
     print(map_config)
