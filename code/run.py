@@ -7,12 +7,13 @@
 
 import multiprocessing
 import os
+import sys
 from multiprocessing import Process
 
-from PySide2.QtWidgets import QApplication
+from PyQt5.QtWidgets import QApplication
 
-from gui.main import SystemTray
 from helper import ConfigHelper
+from qt.main import SystemTray
 
 config_list = ConfigHelper.read_config('config/bat.config')
 config_list = list(filter(lambda c: c['params']['using'] == '1', config_list))
@@ -20,10 +21,12 @@ config_list = list(filter(lambda c: c['params']['using'] == '1', config_list))
 
 def run_qt():
     """启动QT界面应用进程"""
-    qt_app = QApplication([])
+    qt_app = QApplication(sys.argv)
+
     tray_window = SystemTray(config_list)
     tray_window.display()
-    qt_app.exec_()
+
+    sys.exit(qt_app.exec_())
 
 
 def run_bat(bat_path):
